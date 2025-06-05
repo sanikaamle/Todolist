@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TODO List</title>
+    <style>
+      body {
+        margin: 0;
+        background: #f8f8ff;
+        font-family: 'Segoe UI', sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      .frame {
+        width: 100%;
+        max-width: 500px;
+        padding: 24px;
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .text-wrapper {
+        font-size: 28px;
+        font-weight: bold;
+        text-align: center;
+        color: #4a4a4a;
+        margin-bottom: 10px;
+      }
+
+      .overlap-group {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px;
+      }
+
+      .images-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .image,
+      .img {
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+      }
+
+      .overlap {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 20px 0;
+      }
+
+      .image-2 {
+        width: 60px;
+        height: 60px;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+      }
+
+      .image-2:active {
+        transform: scale(0.95);
+      }
+
+      .p {
+        margin-top: 10px;
+        color: #666;
+        font-size: 16px;
+        text-align: center;
+      }
+
+      #task-box {
+        display: none;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
+      }
+
+      #task-input {
+        flex: 1;
+        padding: 10px 16px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 20px;
+        outline: none;
+        margin-right: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      }
+
+      #add-btn {
+        background: #6c63ff;
+        color: white;
+        border: none;
+        width: 40px;
+        height: 40px;
+        font-size: 24px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+      }
+
+      #add-btn:hover {
+        background: #5548c8;
+      }
+
+      #tasks-list {
+        margin-top: 24px;
+      }
+
+      .task-item {
+        background: #f0f0ff;
+        border-radius: 16px;
+        padding: 12px 16px;
+        font-size: 16px;
+        margin-bottom: 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      }
+
+      .delete-btn {
+        background: #ff4d4d;
+        color: white;
+        border: none;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        font-size: 16px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s ease;
+      }
+
+      .delete-btn:hover {
+        background: #e63946;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="frame">
+      <div class="div">
+        <div class="overlap-group">
+          <div class="text-wrapper">TO DO LIST</div>
+          <div class="images-container">
+            <img class="image" src="file:///C:/Users/tejas/OneDrive/Desktop/SANIKA/workhardbitch/todolist/assets/images/kitty.png" alt="Kitty" />
+            <img class="img" src="file:///C:/Users/tejas/OneDrive/Desktop/SANIKA/workhardbitch/todolist/assets/images/flower.png" alt="Flower" />
+          </div>
+        </div>
+
+        <div class="overlap">
+          <img class="image-2" src="file:///C:/Users/tejas/OneDrive/Desktop/SANIKA/workhardbitch/todolist/assets/images/next.png" alt="Next" id="next-btn" />
+          <p class="p">PRESS BUTTON TO GET STARTED.</p>
+        </div>
+
+        <div id="task-box">
+          <input type="text" id="task-input" placeholder="Write your task..." />
+          <button id="add-btn">+</button>
+        </div>
+
+        <div id="tasks-list"></div>
+      </div>
+    </div>
+
+    <script>
+      const nextBtn = document.getElementById('next-btn');
+      const taskBox = document.getElementById('task-box');
+      const addBtn = document.getElementById('add-btn');
+      const taskInput = document.getElementById('task-input');
+      const tasksList = document.getElementById('tasks-list');
+
+      nextBtn.onclick = () => {
+        taskBox.style.display = 'flex';
+        taskInput.focus();
+      };
+
+      addBtn.onclick = () => {
+        const value = taskInput.value.trim();
+        if (value) {
+          const div = document.createElement('div');
+          div.className = 'task-item';
+          div.innerHTML = `
+            <span>${value}</span>
+            <button class="delete-btn" onclick="this.parentElement.remove()">×</button>
+          `;
+          tasksList.appendChild(div);
+          taskInput.value = '';
+          taskInput.focus();
+        }
+      };
+
+      taskInput.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') addBtn.click();
+      });
+    </script>
+  </body>
+</html>
