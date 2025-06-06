@@ -1,0 +1,14 @@
+{
+  "name": "collaborative-todo-list",
+  "version": "1.0.0",
+  "description": "A collaborative todo list application using Electron",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "dependencies": {
+    "electron": "^29.3.1",
+    "firebase": "^10.7.2",
+    "@electron/remote": "^2.0.12"
+  }
+}
